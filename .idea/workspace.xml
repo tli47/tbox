@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d06ec99f-4ae8-456b-9e93-0685c883c5bd" name="更改" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tbox.ui" beforeDir="false" afterPath="$PROJECT_DIR$/tbox.ui" afterDir="false" />
-    </list>
+    <list default="true" id="d06ec99f-4ae8-456b-9e93-0685c883c5bd" name="更改" comment="doc: .gitignore update&#10;&#10;# 标题行：50个字符以内，描述主要变更内容，按以下形式填写&#10;# &lt;type&gt;(&lt;scope&gt;): &lt;subject&gt;&#10;# - type 提交的类型&#10;# feat：新特性,&#10;# fix：修改问题,&#10;# docs：文档修改，仅仅修改了文档，比如 README, CHANGELOG, CONTRIBUTE等等,&#10;# style：代码格式修改, 修改了空格、格式缩进、逗号等等，不改变代码逻辑，注意不是css修改，&#10;# refactor：代码重构，没有加新功能或者修复 bug,&#10;# perf: 优化相关，比如提升性能、体验，&#10;# test：测试用例，包括单元测试、集成测试等,&#10;# chore：其他修改, 比如改变构建流程, 修改依赖管理，增加工具等，&#10;# revert: 回滚到上一个版本。&#10;# - scope: 影响的的范围&#10;# 影响的的范围，可以为空，如Git、CentOS等模块，或者全局All。&#10;# - subject&#10;# 主题，提交描述&#10;#&#10;# 主体内容：更详细的说明文本，建议72个字符以内。 需要描述的信息包括:&#10;#&#10;# * 为什么这个变更是必须的?&#10;# 它可能是用来修复一个bug，增加一个feature，提升性能、可靠性、稳定性等等&#10;# * 它如何解决这个问题? 具体描述解决问题的步骤&#10;# * 是否存在副作用、风险?&#10;#&#10;# 尾部：如果需要的话可以添加一个链接到issue地址或者其它文档，或者关闭某个issue。&#10;#&#10;# 注意，标题行、主体内容、尾部之间都有一个空行！" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -23,6 +20,12 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/tli47/tbox.git",
+    "accountId": "0ffef762-7050-4e24-88b8-893b41595848"
+  }
+}]]></component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/.venv/Lib/site-packages/sounddevice.py" root0="SKIP_INSPECTION" />
   </component>
@@ -90,6 +93,19 @@
       <option name="presentableId" value="Default" />
       <updated>1776063070907</updated>
     </task>
+    <task id="LOCAL-00001" summary="doc: .gitignore update&#10;&#10;# 标题行：50个字符以内，描述主要变更内容，按以下形式填写&#10;# &lt;type&gt;(&lt;scope&gt;): &lt;subject&gt;&#10;# - type 提交的类型&#10;# feat：新特性,&#10;# fix：修改问题,&#10;# docs：文档修改，仅仅修改了文档，比如 README, CHANGELOG, CONTRIBUTE等等,&#10;# style：代码格式修改, 修改了空格、格式缩进、逗号等等，不改变代码逻辑，注意不是css修改，&#10;# refactor：代码重构，没有加新功能或者修复 bug,&#10;# perf: 优化相关，比如提升性能、体验，&#10;# test：测试用例，包括单元测试、集成测试等,&#10;# chore：其他修改, 比如改变构建流程, 修改依赖管理，增加工具等，&#10;# revert: 回滚到上一个版本。&#10;# - scope: 影响的的范围&#10;# 影响的的范围，可以为空，如Git、CentOS等模块，或者全局All。&#10;# - subject&#10;# 主题，提交描述&#10;#&#10;# 主体内容：更详细的说明文本，建议72个字符以内。 需要描述的信息包括:&#10;#&#10;# * 为什么这个变更是必须的?&#10;# 它可能是用来修复一个bug，增加一个feature，提升性能、可靠性、稳定性等等&#10;# * 它如何解决这个问题? 具体描述解决问题的步骤&#10;# * 是否存在副作用、风险?&#10;#&#10;# 尾部：如果需要的话可以添加一个链接到issue地址或者其它文档，或者关闭某个issue。&#10;#&#10;# 注意，标题行、主体内容、尾部之间都有一个空行！">
+      <option name="closed" value="true" />
+      <created>1776843628852</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1776843628852</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="doc: .gitignore update&#10;&#10;# 标题行：50个字符以内，描述主要变更内容，按以下形式填写&#10;# &lt;type&gt;(&lt;scope&gt;): &lt;subject&gt;&#10;# - type 提交的类型&#10;# feat：新特性,&#10;# fix：修改问题,&#10;# docs：文档修改，仅仅修改了文档，比如 README, CHANGELOG, CONTRIBUTE等等,&#10;# style：代码格式修改, 修改了空格、格式缩进、逗号等等，不改变代码逻辑，注意不是css修改，&#10;# refactor：代码重构，没有加新功能或者修复 bug,&#10;# perf: 优化相关，比如提升性能、体验，&#10;# test：测试用例，包括单元测试、集成测试等,&#10;# chore：其他修改, 比如改变构建流程, 修改依赖管理，增加工具等，&#10;# revert: 回滚到上一个版本。&#10;# - scope: 影响的的范围&#10;# 影响的的范围，可以为空，如Git、CentOS等模块，或者全局All。&#10;# - subject&#10;# 主题，提交描述&#10;#&#10;# 主体内容：更详细的说明文本，建议72个字符以内。 需要描述的信息包括:&#10;#&#10;# * 为什么这个变更是必须的?&#10;# 它可能是用来修复一个bug，增加一个feature，提升性能、可靠性、稳定性等等&#10;# * 它如何解决这个问题? 具体描述解决问题的步骤&#10;# * 是否存在副作用、风险?&#10;#&#10;# 尾部：如果需要的话可以添加一个链接到issue地址或者其它文档，或者关闭某个issue。&#10;#&#10;# 注意，标题行、主体内容、尾部之间都有一个空行！" />
+    <option name="LAST_COMMIT_MESSAGE" value="doc: .gitignore update&#10;&#10;# 标题行：50个字符以内，描述主要变更内容，按以下形式填写&#10;# &lt;type&gt;(&lt;scope&gt;): &lt;subject&gt;&#10;# - type 提交的类型&#10;# feat：新特性,&#10;# fix：修改问题,&#10;# docs：文档修改，仅仅修改了文档，比如 README, CHANGELOG, CONTRIBUTE等等,&#10;# style：代码格式修改, 修改了空格、格式缩进、逗号等等，不改变代码逻辑，注意不是css修改，&#10;# refactor：代码重构，没有加新功能或者修复 bug,&#10;# perf: 优化相关，比如提升性能、体验，&#10;# test：测试用例，包括单元测试、集成测试等,&#10;# chore：其他修改, 比如改变构建流程, 修改依赖管理，增加工具等，&#10;# revert: 回滚到上一个版本。&#10;# - scope: 影响的的范围&#10;# 影响的的范围，可以为空，如Git、CentOS等模块，或者全局All。&#10;# - subject&#10;# 主题，提交描述&#10;#&#10;# 主体内容：更详细的说明文本，建议72个字符以内。 需要描述的信息包括:&#10;#&#10;# * 为什么这个变更是必须的?&#10;# 它可能是用来修复一个bug，增加一个feature，提升性能、可靠性、稳定性等等&#10;# * 它如何解决这个问题? 具体描述解决问题的步骤&#10;# * 是否存在副作用、风险?&#10;#&#10;# 尾部：如果需要的话可以添加一个链接到issue地址或者其它文档，或者关闭某个issue。&#10;#&#10;# 注意，标题行、主体内容、尾部之间都有一个空行！" />
   </component>
 </project>
