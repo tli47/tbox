@@ -1,0 +1,9 @@
+QPushButton:checked {
+    background-color: #0078d7;
+    border-left: 4px solid #00ffcc;
+}
+
+QTextBrowser, QTextBrowser viewport {
+    background-color: white;
+    border: none;
+}

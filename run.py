@@ -1,10 +1,13 @@
+import contextlib
 import sys
 import os
+import wave
 
 from PySide6.QtGui import Qt, QIcon, QPixmap
 from PySide6.QtUiTools import QUiLoader
-from PySide6.QtWidgets import QApplication, QMainWindow
-from PySide6.QtCore import QProcess,QFile, QIODevice, Qt
+from PySide6.QtWidgets import QApplication, QMainWindow, QButtonGroup
+from PySide6.QtCore import QProcess, QFile, QIODevice, Qt, QTimer
+from PySide6.QtWidgets import QMessageBox
 
 import numpy as np
 import sounddevice as sd
@@ -55,11 +58,25 @@ class MainWindow(QMainWindow):
         logo_pix = QPixmap(icon_path).scaled(180, 60, Qt.KeepAspectRatio, Qt.SmoothTransformation)
         self.ui.label_2.setPixmap(logo_pix)
 
+        self.group = QButtonGroup(self)
+
+        # 把左侧按钮加进去
+        self.group.addButton(self.ui.pushButton, 0)
+        self.group.addButton(self.ui.pushButton_2, 1)
+
+        # 设置互斥（关键）
+        self.group.setExclusive(True)
+
+        self.group.idClicked.connect(self.switch_page)
+        # 默认选中
+        self.ui.pushButton.setChecked(True)
+        self.ui.stackedWidget.setCurrentIndex(0)
+
         # =========================
         # 左侧导航切换页面
         # =========================
-        self.ui.pushButton.clicked.connect(self.goto_network_test)
-        self.ui.pushButton_2.clicked.connect(self.goto_audio_test)
+        #self.ui.pushButton.clicked.connect(self.goto_network_test)
+        #self.ui.pushButton_2.clicked.connect(self.goto_audio_test)
 
         # =========================
         # Ping功能
@@ -78,11 +95,151 @@ class MainWindow(QMainWindow):
         # =========================
         self.ui.pushButton_6.clicked.connect(self.show_about_dialog)
 
+        # =========================
+        # 分析按钮
+        # =========================
+        self.ui.pushButton_7.clicked.connect(self.sound_analyze)
+
+        # =========================
+        # 播放按钮
+        # =========================
+        self.ui.pushButton_8.clicked.connect(self.sound_play_stop)
+
         # ========== 去掉所有TextBrowser底部横杠 ==========
         self.remove_textbrowser_bars(self.ui.textBrowser)
         self.remove_textbrowser_bars(self.ui.textBrowser_3)
 
+        # =========================
+        # 文件路径选择（QLineEdit点击打开文件）
+        # =========================
+        self.ui.lineEdit_2.setReadOnly(True)  # 建议只读
+        self.ui.lineEdit_2.setCursor(Qt.PointingHandCursor)
+        self.ui.lineEdit_2.installEventFilter(self)
+
         self.process=None
+        self.is_playing=False
+
+    def switch_page(self, id):
+        if id == 0:
+            self.goto_network_test()
+        elif id == 1:
+            self.goto_audio_test()
+
+
+    def eventFilter(self, obj, event):
+        if obj == self.ui.lineEdit_2:
+            if event.type() == event.Type.MouseButtonPress:
+                # 防止重复触发（关键！）
+                if getattr(self, "_opening_dialog", False):
+                    return True
+
+                self._opening_dialog = True
+
+                try:
+                    from PySide6.QtWidgets import QFileDialog
+
+                    file_path, _ = QFileDialog.getOpenFileName(
+                        self,
+                        "选择文件",
+                        "",
+                        "Audio Files (*.wav *.mp3 *.flac *.aac *.ogg);;WAV (*.wav);;MP3 (*.mp3);;"
+                    )
+
+                    if file_path:
+                        self.ui.lineEdit_2.setText(file_path)
+                        #self.ui.textBrowser_3.setText("声音文件: " + file_path)
+
+                finally:
+                    self._opening_dialog = False
+
+                return True
+
+        return super().eventFilter(obj, event)
+
+    def sound_analyze(self):
+        text = self.ui.lineEdit_2.text()
+
+        if text == "":
+            return
+
+        with contextlib.closing(wave.open(text, 'rb')) as wf:
+            channels = wf.getnchannels()  # 声道数
+            sample_width = wf.getsampwidth()  # 采样位宽（字节）
+            framerate = wf.getframerate()  # 采样率
+            frames = wf.getnframes()  # 总帧数
+            duration = round(frames / float(framerate), 2)
+
+            sound_content = (
+                f"==========声音信息================\n"
+                f"声音文件：{text}\n"
+                f"通道数量: {channels}\n"
+                f"采样率: {framerate}\n"
+                f"采样字节: {sample_width}\n"
+                f"持续时间: {duration}\n"
+            )
+
+            self.ui.textBrowser_3.append(sound_content)
+
+    def sound_play_stop(self):
+        if self.is_playing:
+            self.stop_play()
+        else:
+            self.start_play()
+
+    def start_play(self):
+        import soundfile as sf
+        import sounddevice as sd
+
+        path = self.ui.lineEdit_2.text().strip()
+        if not path:
+            self.ui.textBrowser_3.append("[ERROR] 未选择文件")
+            return
+
+        try:
+            data, sr = sf.read(path)
+
+            self.is_playing = True
+            self.ui.pushButton_8.setText("停止")
+            self.ui.textBrowser_3.append("[INFO] 开始播放")
+
+            # 不阻塞UI
+            self.play_obj = sd.play(data, sr, blocking=False)
+
+            # 开启一个定时器检测播放是否结束
+            self.timer = QTimer()
+            self.timer.timeout.connect(self.check_playing)
+            self.timer.start(200)
+
+        except Exception as e:
+            self.ui.textBrowser_3.append(f"[ERROR] {e}")
+
+    def check_playing(self):
+        import sounddevice as sd
+        self.ui.textBrowser_3.append("[INFO] 检查是否播放完毕")
+
+
+        if not sd.get_stream():
+            self.on_play_finished()
+
+        if not sd.get_stream().active:
+            self.on_play_finished()
+
+    def on_play_finished(self):
+        self.is_playing = False
+        self.ui.pushButton_8.setText("播放")
+        self.ui.textBrowser_3.append("[OK] 播放完成")
+
+        if hasattr(self, "timer"):
+            self.timer.stop()
+
+    def stop_play(self):
+        import sounddevice as sd
+
+        sd.stop()
+
+        self.is_playing = False
+        self.ui.pushButton_8.setText("播放")
+        self.ui.textBrowser_3.append("[OK] 已停止")
 
     def remove_textbrowser_bars(self, text_browser):
         # 1. 永久隐藏水平/垂直滚动条
@@ -200,8 +357,6 @@ class MainWindow(QMainWindow):
     # 关于对话框
     # =========================
     def show_about_dialog(self):
-        from PySide6.QtWidgets import QMessageBox
-        from PySide6.QtGui import QPixmap
 
         # 1. 创建消息框
         msg = QMessageBox(self)
@@ -226,8 +381,13 @@ TBOX 多功能测试工具
         msg.exec()
 
 
+def load_qss(path):
+    with open(path, "r", encoding="utf-8") as f:
+        return f.read()
+
 if __name__ == "__main__":
     app = QApplication(sys.argv)
     window = MainWindow()
     window.show()
+    app.setStyleSheet(load_qss("style/main.qss"))
     sys.exit(app.exec())
