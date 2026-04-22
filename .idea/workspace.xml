@@ -5,9 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d06ec99f-4ae8-456b-9e93-0685c883c5bd" name="更改" comment="">
-      <change afterPath="$PROJECT_DIR$/style/main.qss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run.py" beforeDir="false" afterPath="$PROJECT_DIR$/run.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tbox.ui" beforeDir="false" afterPath="$PROJECT_DIR$/tbox.ui" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />

@@ -127,10 +127,7 @@
             </size>
            </property>
            <property name="styleSheet">
-            <string notr="true">QPushButton:checked {
-    background-color: #0078d7;
-    border-left: 4px solid #00ffcc;
-}</string>
+            <string notr="true"/>
            </property>
            <property name="text">
             <string>网络测试</string>
@@ -375,7 +372,7 @@
             <item>
              <widget class="QTextBrowser" name="textBrowser_3">
               <property name="verticalScrollBarPolicy">
-               <enum>Qt::ScrollBarPolicy::ScrollBarAsNeeded</enum>
+               <enum>Qt::ScrollBarPolicy::ScrollBarAlwaysOff</enum>
               </property>
               <property name="horizontalScrollBarPolicy">
                <enum>Qt::ScrollBarPolicy::ScrollBarAlwaysOff</enum>
